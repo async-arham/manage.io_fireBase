@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://supabase.com/favicon/apple-icon-60x60.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Manage.io • Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Unbounded:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: unbounded;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        ::-moz-selection {
+            color: rgb(51 51 51);
+            background: rgb(110 231 183);
+        }
+
+        ::selection {
+            color: rgb(51 51 51);
+            background: rgb(110 231 183);
+        }
+
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            color: white;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+        }
+
+        #waterMark-section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* filter: grayscale(1); */
+            flex-direction: column;
+            background-repeat: no-repeat;
+            background-color: cover;
+        }
+
+        #waterMark-section img {
+            opacity: 0.2;
+            width: 300px;
+        }
+
+        #waterMark-section h2 {
+            font-weight: 400;
+            font-size: 20px;
+            color: #808080b1;
+
+        }
+
+        div:where(.swal2-icon).swal2-warning,
+        div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line],
+        div:where(.swal2-icon).swal2-error {
+            color: crimson;
+            border-color: crimson;
+        }
+
+        div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+            background: crimson;
+        }
+
+        nav {
+            width: 100%;
+            padding: 20px 40px;
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+            /* border-bottom: 1px solid rgba(192, 192, 192, 0.08); */
+            /* background-color: #111; */
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 30px;
+            margin-right: 8px;
+        }
+
+        nav #logOut {
+            background-color: hsl(0deg 0% 14.12%);
+            color: lavender;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            border: 1px solid hsl(0deg 0% 21.18%);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.4s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #displayName {
+            text-transform: capitalize;
+        }
+
+        #logOut:hover {
+            border: 1px solid rgb(103 59 57);
+            background-color: #302626;
+            color: rgb(236 146 142)
+        }
+
+        abbr {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media screen and (min-width:1800px) {
+            nav {
+                padding: 20px 8%;
+            }
+
+            #waterMark-section img {
+                width: 500px;
+            }
+
+            #waterMark-section h2 {
+                font-size: 35px;
+            }
+
+
+        }
+
+        @media screen and (max-width:600px) {
+
+            .logo {
+                font-size: 13px;
+            }
+
+            .logo img {
+                width: 25px;
+            }
+
+            nav {
+                padding: 20px 10px;
+                align-items: center;
+            }
+
+            nav #logOut {
+                padding: 5px 10px;
+                font-size: 11px;
+                font-weight: 300;
+            }
+
+
+            #swal2-title {
+                font-size: 22px;
+            }
+
+            #swal2-html-container {
+                font-size: 15px;
+            }
+
+            .swal2-confirm {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <nav>
+            <h3 class="logo"><img
+                    src="https://logowik.com/content/uploads/images/supabase-icon1721342077.logowik.com.webp"
+                    alt="">Manage.<span>io</span></h3>
+
+            <div class="dets">
+                <button id="logOut">
+                    <abbr title="Log Out">
+                        <div id="displayName"></div><i class="ri-logout-box-r-line"></i>
+                    </abbr>
+                </button>
+
+            </div>
+        </nav>
+
+        <div id="waterMark-section">
+            <img src="assets/waterMark.png">
+            <h2>Nothing to show here!</h2>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="firebaseauth.js"></script>
+</body>
+
+</html>

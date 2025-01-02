@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="https://supabase.com/favicon/apple-icon-60x60.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Manage.io • Sign Up</title>
+    <script type="module" src="firebaseauth.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Unbounded:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: unbounded;
+            text-decoration: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        ::-moz-selection {
+            color: rgb(51 51 51);
+            background: rgb(110 231 183);
+        }
+
+        ::selection {
+            color: rgb(51 51 51);
+            background: rgb(110 231 183);
+        }
+
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .swal2-container {
+            z-index: 9999 !important;
+        }
+
+        .swal2-container {
+            overflow: auto;
+        }
+
+        body.swal2-shown {
+            overflow: hidden !important;
+        }
+
+        div:where(.swal2-icon).swal2-warning,
+        div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line],
+        div:where(.swal2-icon).swal2-error {
+            color: crimson;
+            border-color: crimson;
+        }
+
+        div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+            background: crimson;
+        }
+
+
+        body {
+            color: white;
+            background-color: black;
+            overflow: hidden
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+        }
+
+        #hero {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #left {
+            height: 100%;
+            width: 40%;
+            background-image: url(assets/illust.png);
+            background-size: contain;
+            display: flex;
+            align-items: center;
+            padding: 0px 40px;
+        }
+
+        #right {
+            width: 55%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #form-cont {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #name {
+            text-transform: capitalize;
+        }
+
+        #form-cont input {
+            padding-bottom: 10px;
+            width: 55%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #333;
+            color: lavender;
+            font-size: 15px;
+            font-weight: 400;
+            font-family: montserrat;
+        }
+
+        .hero-heading {
+            font-size: 4.5vw;
+            line-height: 0.9;
+            color: ghostwhite;
+        }
+
+        .hero-heading span {
+            color: transparent;
+            -webkit-text-stroke: 1px #7efc003b;
+        }
+
+        .heading {
+            width: 55%;
+            font-size: 2vw;
+            color: lavender;
+            font-weight: 500;
+        }
+
+        nav {
+            width: 100%;
+            padding: 20px 40px;
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav #login {
+            background-color: hsl(0deg 0% 14.12%);
+            color: lavender;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            border: 1px solid hsl(0deg 0% 21.18%);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.4s;
+        }
+
+        #login:hover {
+            border: 1px solid hsl(0deg 0% 27.06%);
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        .logo img {
+            width: 30px;
+            margin-right: 8px;
+        }
+
+        #signUpBtn {
+            width: 55%;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background-color: rgb(0 98 57);
+            border: 1px solid rgb(19 128 82);
+            color: lavenderblush;
+            transition: all 0.8s;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #signUpBtn:hover {
+            background-color: hsl(153.33deg 47.37% 29.8%);
+            border: 1px solid hsl(153.1deg 60.17% 52.75%);
+        }
+
+        #signUpBtn:active {
+            cursor: default;
+        }
+
+        #eye {
+            right: 23%;
+            position: absolute;
+            cursor: pointer;
+            bottom: 90px;
+            font-size: 20px;
+        }
+
+        @media screen and (min-width:1800px) {
+
+            #hero {
+                width: 90%;
+                margin: auto;
+            }
+
+            .hero-heading {
+                font-size: 3.3vw;
+            }
+
+            #hero {
+                width: 85%;
+                margin: auto;
+                gap: 8%;
+                padding: 0px 4%;
+            }
+
+            .heading {
+                font-size: 35px;
+                white-space: nowrap;
+            }
+
+            #left {
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 50%;
+            }
+
+            #right {
+                width: 50%;
+            }
+
+            #form-cont input {
+                font-size: 18px;
+            }
+
+            #signUpBtn {
+                font-size: 18px;
+            }
+
+            nav {
+                padding: 20px 8%;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            nav {
+                padding: 20px;
+            }
+
+            #hero {
+                background-image: url(assets/illust.png);
+                background-position: center 50%;
+            }
+
+            #left {
+                display: none;
+            }
+
+            #right {
+                width: 100%;
+            }
+
+            #form-cont input,
+            #signUpBtn {
+                width: 80%;
+            }
+
+            .heading {
+                text-align: center;
+                font-size: 7vw;
+                color: lavender;
+                font-weight: 500;
+                width: 80%;
+            }
+
+            #swal2-title {
+                font-size: 22px;
+            }
+
+            #swal2-html-container {
+                font-size: 15px;
+            }
+
+            .swal2-confirm {
+                width: 70px;
+            }
+
+            #eye {
+                right: 12%;
+            }
+
+        }
+
+        .loadingtext p {
+            color: white;
+            position: relative;
+        }
+
+        .loadingtext p::after {
+            position: absolute;
+            animation: b 1s infinite linear;
+            color: white;
+            content: "";
+            left: 105%;
+        }
+
+        @keyframes b {
+            0% {
+                content: "";
+            }
+
+            10% {
+                content: ".";
+            }
+
+            40% {
+                content: "..";
+            }
+
+            70% {
+                content: "...";
+            }
+
+            100% {
+                content: "";
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <nav>
+            <h3 class="logo"><img
+                    src="https://logowik.com/content/uploads/images/supabase-icon1721342077.logowik.com.webp"
+                    alt="">Manage.<span>io</span></h3>
+            <button id="login">Log In</button>
+        </nav>
+        <div id="hero">
+            <div id="left">
+                <div class="hero-heading">
+                    <h1>Go<span>.</span><br>Excel<span>.</span><br>Expand<span>.</span>
+                    </h1>
+                </div>
+            </div>
+            <div id="right">
+                <form class="animate__animated animate__fadeInRightBig" id="form-cont">
+                    <div class="heading">create account.</div>
+
+                    <input type="text" name="inputName" id="name" placeholder="Input Name" spellcheck="false"
+                        autocomplete="off">
+                    <input type="email" name="inputEmail" id="email" placeholder="Input Email" spellcheck="false"
+                        autocomplete="off">
+
+                    <input type="password" name="inputPass" id="password" placeholder="Create Password">
+                    <span id="eye"><i class="ri-eye-close-line"></i></span>
+
+
+                    <button id="signUpBtn" onclick="showLoad()">
+                        Sign Up
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+
+        const showLoad = () => {
+            let inputName = document.getElementsByName('inputName')[0]
+            let inputEmail = document.getElementsByName('inputEmail')[0]
+            let inputPassword = document.getElementsByName('inputPass')[0]
+
+            if (inputName.value !== "" && inputEmail.value !== "" && inputPassword.value !== "") {
+                signUpBtn.innerHTML = `
+                  <div class="loadingtext">
+                                <p>Please Wait</p>
+                            </div>
+    
+                `
+                signUpBtn.disabled = true
+
+                setTimeout(() => {
+                    signUpBtn.innerHTML = 'Sign Up'
+                    signUpBtn.disabled = false
+                }, 4000);
+            }
+        }
+
+
+
+        let toLoginBtn = document.querySelector("#login")
+        let form = document.querySelector("#form-cont")
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault()
+        })
+
+
+        toLoginBtn.addEventListener('click', () => {
+            form.classList.add('animate__fadeOutRightBig')
+
+            setTimeout(() => {
+                location.href = "login.html"
+            }, 900);
+
+        })
+
+        const passwordInput = document.querySelector('#password');
+        const eyeIcon = document.querySelector('#eye');
+        eyeIcon.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = '<i class="ri-eye-line"></i>';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = '<i class="ri-eye-close-line"></i>';
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
