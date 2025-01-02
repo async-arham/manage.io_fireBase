@@ -222,6 +222,41 @@
             font-size: 20px;
         }
 
+        .loadingtext p {
+            color: white;
+            position: relative;
+        }
+
+        .loadingtext p::after {
+            position: absolute;
+            animation: b 1s infinite linear;
+            color: white;
+            content: "";
+            left: 105%;
+        }
+
+        @keyframes b {
+            0% {
+                content: "";
+            }
+
+            10% {
+                content: ".";
+            }
+
+            40% {
+                content: "..";
+            }
+
+            70% {
+                content: "...";
+            }
+
+            100% {
+                content: "";
+            }
+        }
+
         @media screen and (min-width:1800px) {
 
             #hero {
@@ -315,41 +350,11 @@
                 right: 12%;
             }
 
-        }
-
-        .loadingtext p {
-            color: white;
-            position: relative;
-        }
-
-        .loadingtext p::after {
-            position: absolute;
-            animation: b 1s infinite linear;
-            color: white;
-            content: "";
-            left: 105%;
-        }
-
-        @keyframes b {
-            0% {
-                content: "";
+            nav #login {
+                padding: 7px 15px;
+                font-size: 13px;
             }
 
-            10% {
-                content: ".";
-            }
-
-            40% {
-                content: "..";
-            }
-
-            70% {
-                content: "...";
-            }
-
-            100% {
-                content: "";
-            }
         }
     </style>
 </head>
