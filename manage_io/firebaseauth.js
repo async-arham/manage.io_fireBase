@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 // Firebase configuration
@@ -151,38 +151,46 @@ if (loginBtn) {
 }
 
 // Log Out fnc
-const logOutButton = document.querySelector('#logOut');
-logOutButton.addEventListener('click', () => {
-    signOut(auth)
-        .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Logged Out',
-                text: 'You have been logged out successfully!',
-                confirmButtonColor: '#006239',
-                background: '#111',
-                color: 'gainsboro',
-                heightAuto: false,
-                focusConfirm: false
-            }).then(() => {
-                localStorage.removeItem('userName');
-                window.location.href = 'login.html';
-            });
-        })
-        .catch((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Logout Failed',
-                text: 'Unable to log out. Please try again.',
-                confirmButtonColor: '#006239',
-                background: '#111',
-                color: 'gainsboro',
-                heightAuto: false,
-                focusConfirm: false
-            });
-            console.error('Logout Error:', error);
+document.addEventListener('DOMContentLoaded', () => {
+    const logOutButton = document.querySelector('#logOut');
+    if (logOutButton) {
+        logOutButton.addEventListener('click', () => {
+            signOut(auth)
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logged Out',
+                        text: 'You have been logged out successfully!',
+                        confirmButtonColor: '#006239',
+                        background: '#111',
+                        color: 'gainsboro',
+                        heightAuto: false,
+                        focusConfirm: false
+                    }).then(() => {
+                        localStorage.removeItem('userName');
+                        window.location.href = 'login.html';
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Logout Failed',
+                        text: 'Unable to log out. Please try again.',
+                        confirmButtonColor: '#006239',
+                        background: '#111',
+                        color: 'gainsboro',
+                        heightAuto: false,
+                        focusConfirm: false
+                    });
+                    console.error('Logout Error:', error);
+                });
         });
+    } else {
+        console.warn('Logout button not found!');
+    }
 });
+
+
 
 // Display the logged-in user's name
 const displayName = document.querySelector('#displayName');
@@ -190,3 +198,59 @@ const userName = localStorage.getItem('userName');
 if (userName) {
     displayName.innerHTML = `${userName}`;
 }
+
+
+// Forgot password functionality
+const forgotPass = document.querySelector('#forgotPass');
+
+let forgotPassword = () => {
+    // Retrieve the email from the input field
+    const email = document.querySelector('#email').value.trim();
+
+    if (!email) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Email Required',
+            text: 'Please enter your email address.',
+            confirmButtonColor: '#006239',
+            background: '#111',
+            color: 'gainsboro',
+            heightAuto: false,
+            focusConfirm: false
+        });
+        return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Password Reset',
+                text: 'Check your email for the reset link!',
+                confirmButtonColor: '#006239',
+                background: '#111',
+                color: 'gainsboro',
+                heightAuto: false,
+                focusConfirm: false
+            });
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            let errorMessage = 'Something went wrong. Please try again.';
+            if (errorCode === 'auth/user-not-found') {
+                errorMessage = 'No account found with this email address.';
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+                confirmButtonColor: '#006239',
+                background: '#111',
+                color: 'gainsboro',
+                heightAuto: false,
+                focusConfirm: false
+            });
+        });
+}
+
+forgotPass.addEventListener('click', forgotPassword);
