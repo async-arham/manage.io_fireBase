@@ -250,6 +250,23 @@
             }
         }
 
+        #forgotPass {
+            right: 23%;
+            position: absolute;
+            font-size: 9px;
+            bottom: 22%;
+            font-family: host grotesk;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: hsl(153.33deg 47.37% 29.8%);
+            border-bottom: 1px solid transparent;
+        }
+
+        #forgotPass:hover {
+            border-bottom: 1px solid hsl(153.33deg 47.37% 29.8%);
+        }
+
         @media screen and (min-width:1800px) {
             #hero {
                 width: 90%;
@@ -356,8 +373,8 @@
     <main>
         <nav>
             <h3 class="logo"><img
-                    src="https://logowik.com/content/uploads/images/supabase-icon1721342077.logowik.com.webp"
-                    >Manage.<span>io</span></h3>
+                    src="https://logowik.com/content/uploads/images/supabase-icon1721342077.logowik.com.webp">Manage.<span>io</span>
+            </h3>
 
             <button id="signUp">Sign Up</button>
         </nav>
@@ -374,6 +391,7 @@
                         autocomplete="off" required>
                     <input name="password" type="password" id="password" placeholder="Input Password" required>
                     <span id="eye"><i class="ri-eye-close-line"></i></span>
+                    <span id="forgotPass">Forgot password?</span>
 
                     <button id="loginBtn" type="submit" onclick="showLoad()">Log in</button>
                 </form>
