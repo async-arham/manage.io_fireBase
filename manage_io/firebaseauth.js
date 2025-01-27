@@ -125,7 +125,7 @@ if (loginBtn) {
                         heightAuto: false,
                         focusConfirm: false
                     }).then(() => {
-                        window.location.href = 'homePage.html';
+                        window.location.href = 'https://cruddle.vercel.app';
                     });
                 }
             })
